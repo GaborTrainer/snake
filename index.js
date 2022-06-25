@@ -7,8 +7,9 @@ const mainMenu = () => {
     ['high scores'],
     ['about the game'],
     ['version'],
-    ['exit']]
-  ;
+    ['exit']
+  ];
+
   return table(menuData);
 }
 console.log(mainMenu());
@@ -16,13 +17,14 @@ console.log(mainMenu());
 const highScore = () => {
 
   const highScoreData = [
-    ['user']['high Score'],
-    ['']['at'],
-    [''][''],
-    [''][''],
-    [''][''],
-    ['']['']]
-    ;
+    ['user', 'high Score'],
+    ['', 1],
+    ['', 2],
+    ['', 3],
+    ['', 4],
+    ['', 5]
+  ];
+
   return table(highScoreData);
   }
 console.log(highScore());

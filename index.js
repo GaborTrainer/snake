@@ -1,8 +1,27 @@
-const { table } = require('table');
-const { highScore } = require('./menu/highScore');
+//const { highScore } = require('./menu/highScore');
 const { mainMenu } = require('./menu/mainMenu');
 const { gameTitle } = require('./layout/gameTitle');
+const keypress = require('keypress');
+const context = {
+  mainMenuCurrent: 0,
+} 
+// make `process.stdin` begin emitting "keypress" events
+keypress(process.stdin);
+process.stdin.on('keypress', function (ch, key) {
+  if (key.name === 'down') {
+    context.mainMenuCurrent++;
+    console.clear();
+    console.log(mainMenu(context));
+  }
+  if (key && key.ctrl && key.name == 'c') {
+    process.stdin.pause();
+    process.exit();
+  }
+});
 
-console.log(highScore());
-console.log(mainMenu());
+process.stdin.setRawMode(true);
+process.stdin.resume();
+
+//console.log(highScore());
+console.log(mainMenu(context));
 gameTitle();

@@ -4,12 +4,18 @@ const { gameTitle } = require('./layout/gameTitle');
 const keypress = require('keypress');
 const context = {
   mainMenuCurrent: 0,
-} 
-// make `process.stdin` begin emitting "keypress" events
+  mainMenuMaxIndex: 5,
+}
+
 keypress(process.stdin);
 process.stdin.on('keypress', function (ch, key) {
-  if (key.name === 'down') {
+  if (key.name === 'down' && mainMenuCurrent != context.mainMenuMaxIndex) {
     context.mainMenuCurrent++;
+    console.clear();
+    console.log(mainMenu(context));
+  }
+  if (key.name === 'up' && mainMenuCurrent != 0) {
+    context.mainMenuCurrent--;
     console.clear();
     console.log(mainMenu(context));
   }

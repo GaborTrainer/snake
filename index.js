@@ -9,12 +9,12 @@ const context = {
 
 keypress(process.stdin);
 process.stdin.on('keypress', function (ch, key) {
-  if (key.name === 'down' && mainMenuCurrent != context.mainMenuMaxIndex) {
+  if (key.name === 'down' && context.mainMenuCurrent != context.mainMenuMaxIndex) {
     context.mainMenuCurrent++;
     console.clear();
     console.log(mainMenu(context));
   }
-  if (key.name === 'up' && mainMenuCurrent != 0) {
+  if (key.name === 'up' && context.mainMenuCurrent != 0) {
     context.mainMenuCurrent--;
     console.clear();
     console.log(mainMenu(context));

@@ -4,8 +4,8 @@ const _ = require('lodash');
 
 const mainMenu = (context) => {
   const menuDataInstance = _.cloneDeep(menuData);
-  const currentText = menuDataInstance[context.mainMenuCurrent][0];
-  menuDataInstance[context.mainMenuCurrent][0] = `[${currentText}]`;
+  const currentText = menuDataInstance[context.mainMenuCurrentIndex][0];
+  menuDataInstance[context.mainMenuCurrentIndex][0] = `[${currentText}]`;
   return table(menuDataInstance, {
     columnDefault: {
       alignment: 'center',
@@ -13,6 +13,12 @@ const mainMenu = (context) => {
   });
 }
 
+const displayMainMenu = (context) => {
+  console.clear();
+  console.log(mainMenu(context));
+}
+
 module.exports = {
   mainMenu: mainMenu,
+  displayMainMenu: displayMainMenu,
 };

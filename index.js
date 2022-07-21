@@ -1,33 +1,37 @@
-//const { highScore } = require('./menu/highScore');
-const { mainMenu } = require('./menu/mainMenu');
+const { mainMenu, displayMainMenu } = require('./menu/mainMenu');
 const { gameTitle } = require('./layout/gameTitle');
 const keypress = require('keypress');
+const { highScore } = require('./menu/highScore');
 const context = {
-  mainMenuCurrent: 0,
+  mainMenuCurrentIndex: 0,
   mainMenuMaxIndex: 5,
 }
 
+
+
 keypress(process.stdin);
-process.stdin.on('keypress', function (ch, key) {
-  if (key.name === 'down' && context.mainMenuCurrent != context.mainMenuMaxIndex) {
-    context.mainMenuCurrent++;
-    console.clear();
-    console.log(mainMenu(context));
+process.stdin.on('keypress', (ch, key) => {
+  if (key.name === 'down' && context.mainMenuCurrentIndex != context.mainMenuMaxIndex) {
+    context.mainMenuCurrentIndex++;
+    displayMainMenu(context);
   }
-  if (key.name === 'up' && context.mainMenuCurrent != 0) {
-    context.mainMenuCurrent--;
-    console.clear();
-    console.log(mainMenu(context));
+  if (key.name === 'up' && context.mainMenuCurrentIndex != 0) {
+    context.mainMenuCurrentIndex--;
+    displayMainMenu(context);
   }
   if (key && key.ctrl && key.name == 'c') {
     process.stdin.pause();
     process.exit();
   }
+  if (key.name === 'return' && context.mainMenuCurrentIndex === 2) {
+    console.clear();
+    console.log(highScore());
+  }
+  if (key.name === 'escape') {
+    displayMainMenu(context);
+  }
 });
 
 process.stdin.setRawMode(true);
 process.stdin.resume();
-
-//console.log(highScore());
-console.log(mainMenu(context));
-gameTitle();
+displayMainMenu(context);

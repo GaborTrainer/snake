@@ -14,6 +14,7 @@ const mainMenu = (context) => {
 }
 
 const displayMainMenu = (context) => {
+  context.screen = 'mainMenu';
   console.clear();
   console.log(mainMenu(context));
 }
